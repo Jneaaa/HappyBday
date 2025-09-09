@@ -122,7 +122,7 @@
     <!-- Sad Popup -->
     <div class="popup" id="sadPopup">
       <div class="popup-content">
-        <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTU2YWRnc3FkdWZmaWI3MGR2cWFsenlzZ2JyZWhieTBwaGsxMHlodyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/9Y5BbDSkSTiY8/giphy.gif" alt="sad">
+        <img src="https://media3.giphy.com/media/9Y5BbDSkSTiY8/giphy.gif" alt="sad">
         <p>awww why? You'll love it 💔</p>
         <button onclick="closePopup()">Okay</button>
       </div>
@@ -195,17 +195,18 @@
         </audio>
 
         <!-- Hidden button appears after song ends -->
-      <div>
-        <button id="sendVideoBtn" style="display:none; margin-top:20px;" onclick="sendVideo()">🎁 Send Surprise Video</button>
+        <div>
+          <button id="sendVideoBtn" style="display:none; margin-top:20px;" onclick="sendVideo()">🎁 Send Surprise Video</button>
+        </div>
       </div>
+      <button onclick="goToPage('page2')">Return</button>
     </div>
-    <button onclick="goToPage('page2')">Return</button>
   </div>
-</div>
 
   <!-- EmailJS Script -->
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script>
+    // Unlock screen
     function checkCode() {
       const code = document.getElementById("accessCode").value;
       const correctCode = "0925"; // <--- Change this to your secret code
@@ -218,11 +219,13 @@
       }
     }
 
+    // Page navigation
     function goToPage(pageId) {
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       document.getElementById(pageId).classList.add('active');
     }
 
+    // Popup controls
     function showPopup() {
       document.getElementById('sadPopup').style.display = 'flex';
     }
@@ -230,24 +233,26 @@
       document.getElementById('sadPopup').style.display = 'none';
     }
 
-    // 🎶 Surprise video logic
+    // EmailJS init (✅ only once!)
     (function() {
-      emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS public key
+      emailjs.init("0zIVfrxQgQ2jWD8unXS1L"); // your real EmailJS public key
     })();
 
+    // Reveal button after music ends
     function showVideoButton() {
       document.getElementById("sendVideoBtn").style.display = "block";
     }
 
+    // Send surprise video
     function sendVideo() {
-      emailjs.send("service_7k7y4ol", "YOUR_TEMPLATE_ID", {
-        to_email: "jneaaa04@gmail.com", // change to his email
+      emailjs.send("service_7k7y4ol", "template_vi2qo4p", {
+        to_email: "jneaaa04@gmail.com", 
         message: "Happy Birthday my love! 🎂❤️ Here’s your surprise video: https://drive.google.com/file/d/129peUbsxHojAm9rig7ydZOKnCTuikqm9/view?usp=sharing"
       })
       .then(function() {
         alert("🎉 Video sent to your email!");
       }, function(error) {
-        alert("❌ Aww failed to send email. Please try again.");
+        alert("❌ Aww failed to send email. Just ask me for it huhu di ko ma link .");
         console.error(error);
       });
     }
