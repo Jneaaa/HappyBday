@@ -189,15 +189,22 @@
         <img src="flower-bouquet.png" alt="Flowers">
         <h3>Listen to this my love:</h3>
         <br>
-        <audio id="song" controls>
+        <audio id="song" controls onended="showVideoButton()">
           <source src="ThePool.mp3" type="audio/mp3">
           Your browser does not support audio.
         </audio>
-      </div>
-      <button onclick="goToPage('page2')">Return</button>
-    </div>
-  </div>
 
+        <!-- Hidden button appears after song ends -->
+      <div>
+        <button id="sendVideoBtn" style="display:none; margin-top:20px;" onclick="sendVideo()">🎁 Send Surprise Video</button>
+      </div>
+    </div>
+    <button onclick="goToPage('page2')">Return</button>
+  </div>
+</div>
+
+  <!-- EmailJS Script -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script>
     function checkCode() {
       const code = document.getElementById("accessCode").value;
@@ -221,6 +228,28 @@
     }
     function closePopup() {
       document.getElementById('sadPopup').style.display = 'none';
+    }
+
+    // 🎶 Surprise video logic
+    (function() {
+      emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS public key
+    })();
+
+    function showVideoButton() {
+      document.getElementById("sendVideoBtn").style.display = "block";
+    }
+
+    function sendVideo() {
+      emailjs.send("service_7k7y4ol", "YOUR_TEMPLATE_ID", {
+        to_email: "jneaaa04@gmail.com", // change to his email
+        message: "Happy Birthday my love! 🎂❤️ Here’s your surprise video: https://drive.google.com/file/d/129peUbsxHojAm9rig7ydZOKnCTuikqm9/view?usp=sharing"
+      })
+      .then(function() {
+        alert("🎉 Video sent to your email!");
+      }, function(error) {
+        alert("❌ Aww failed to send email. Please try again.");
+        console.error(error);
+      });
     }
   </script>
 </body>
